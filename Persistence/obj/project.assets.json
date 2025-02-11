@@ -1153,8 +1153,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\TBaxter\\Reactivities\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\TBaxter\\Reactivities\\Domain\\Domain.csproj"
+            "c:\\Users\\TBaxter\\Reactivities\\Domain\\Domain.csproj": {
+              "projectPath": "c:\\Users\\TBaxter\\Reactivities\\Domain\\Domain.csproj"
             }
           }
         }
