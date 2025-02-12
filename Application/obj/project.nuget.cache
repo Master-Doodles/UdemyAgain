@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wf8qp754IqA=",
+  "dgSpecHash": "4cYUuIMNpjw=",
   "success": true,
-  "projectFilePath": "c:\\Users\\TBaxter\\Reactivities\\Application\\Application.csproj",
+  "projectFilePath": "C:\\Users\\TBaxter\\Reactivities\\Application\\Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TBaxter\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\TBaxter\\.nuget\\packages\\mediatr\\12.4.1\\mediatr.12.4.1.nupkg.sha512",

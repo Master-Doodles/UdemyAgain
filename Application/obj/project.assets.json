@@ -1247,11 +1247,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\TBaxter\\Reactivities\\Application\\Application.csproj",
+      "projectUniqueName": "C:\\Users\\TBaxter\\Reactivities\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "c:\\Users\\TBaxter\\Reactivities\\Application\\Application.csproj",
+      "projectPath": "C:\\Users\\TBaxter\\Reactivities\\Application\\Application.csproj",
       "packagesPath": "C:\\Users\\TBaxter\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\TBaxter\\Reactivities\\Application\\obj\\",
+      "outputPath": "C:\\Users\\TBaxter\\Reactivities\\Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\TBaxter\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1266,8 +1266,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "c:\\Users\\TBaxter\\Reactivities\\Domain\\Domain.csproj": {
-              "projectPath": "c:\\Users\\TBaxter\\Reactivities\\Domain\\Domain.csproj"
+            "C:\\Users\\TBaxter\\Reactivities\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\TBaxter\\Reactivities\\Domain\\Domain.csproj"
             },
             "C:\\Users\\TBaxter\\Reactivities\\Persistence\\Persistence.csproj": {
               "projectPath": "C:\\Users\\TBaxter\\Reactivities\\Persistence\\Persistence.csproj"

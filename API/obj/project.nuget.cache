@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sS47JtCSfQw=",
+  "dgSpecHash": "0Y6ZTKY2FFk=",
   "success": true,
-  "projectFilePath": "c:\\Users\\TBaxter\\Reactivities\\API\\API.csproj",
+  "projectFilePath": "C:\\Users\\TBaxter\\Reactivities\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TBaxter\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\TBaxter\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
