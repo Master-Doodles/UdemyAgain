@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 import agent from "../api/agent"
 
-export const useActivities = () => {
+export const useActivities = (id?:string) => {
   const queryClient = useQueryClient();
   const { data: activities, isPending } = useQuery({
     queryKey: ['activities'],
@@ -11,6 +11,15 @@ export const useActivities = () => {
       return response.data
     }
   });
+  //web hook to fetch a single activity from API based on id
+  const {data:activity, isLoading:isLoadingActivity} = useQuery({
+      queryKey:['activity',id],
+      queryFn: async () => {
+        const response = await agent.get<Activity>(`/activities/${id}`)
+        return response.data
+      },
+      enabled: !!id //if we have the id return true and then execute this hook
+  })
 
   const updateActivity = useMutation({
     mutationFn: async (activity: Activity) => {
@@ -29,7 +38,8 @@ export const useActivities = () => {
 
   const createActivity = useMutation({
     mutationFn: async (activity: Activity) => {
-      await agent.post('/activities', activity)
+      const response = await agent.post('/activities', activity)
+      return response
     }
     ,
     onSuccess: async () => {
@@ -62,7 +72,9 @@ export const useActivities = () => {
     isPending,
     updateActivity,
     createActivity,
-    deleteActivity
+    deleteActivity,
+    activity,
+    isLoadingActivity
   }
 
 }
