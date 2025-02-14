@@ -1,6 +1,7 @@
 import { Card, Badge, CardMedia, Box, Typography, Button } from "@mui/material";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { formatDate } from "../../../lib/util/util";
+import { useActivities } from "../../../lib/hooks/useActivities";
 
 type Props = {
     activity: Activity
@@ -12,6 +13,9 @@ export default function ActivityDetailsHeader({ activity }: Props) {
     const isGoing = true;
     const loading = false;
 
+    const { deleteActivity } = useActivities(activity.id);
+    const navigate = useNavigate();
+
     return (
         <Card sx={{ position: 'relative', mb: 2, backgroundColor: 'transparent', overflow: 'hidden' }}>
             {isCancelled && (
@@ -19,8 +23,6 @@ export default function ActivityDetailsHeader({ activity }: Props) {
                     sx={{ position: 'absolute', left: 40, top: 20, zIndex: 1000, transform: 'scale(1.3)' }}
                     color="error"
                     badgeContent="Cancelled"
-
-
                 />
             )}
             <CardMedia
@@ -58,7 +60,12 @@ export default function ActivityDetailsHeader({ activity }: Props) {
                             <Button
                                 variant='contained'
                                 color={isCancelled ? 'success' : 'error'}
-                                onClick={() => { }}
+                                onClick={async () => { 
+                                    
+                                    deleteActivity.mutate(activity.id);
+                                    navigate(`/activities`); 
+
+                                }}
                             >
                                 {isCancelled ? 'Re-activate Activity' : 'Cancel Activity'}
                             </Button>
@@ -66,7 +73,7 @@ export default function ActivityDetailsHeader({ activity }: Props) {
                                 variant="contained"
                                 color="primary"
                                 component={Link}
-                                to={`/manage/activityId`}
+                                to={`/manage/${activity.id}`}
                                 disabled={isCancelled}
                             >
                                 Manage Event

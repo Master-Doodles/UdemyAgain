@@ -28,8 +28,12 @@ export default function ActivityForm() {
         } else {
             createActivity.mutate(data as unknown as Activity,
                 {
-                    onSuccess: (id) => {
-                        navigate(`/activities/${id}`);
+                    onSuccess: (activity) => {
+                        navigate(`/activities/${activity.data}`);
+                    },
+                    onError: ()=>{
+                        navigate('/activities')
+                        alert('Could not add activity(problem in code)');
                     }
                 }
             );
