@@ -1,5 +1,9 @@
+using API.Middleware;
+using Application.Activities.Commands;
 using Application.Activities.Core;
 using Application.Activities.Queries;
+using Application.Core;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -15,11 +19,23 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 });
 
 builder.Services.AddCors();
-builder.Services.AddMediatR(option => 
-option.RegisterServicesFromAssemblyContaining<GetActivityList.Handler>());
+
+//middleware 
+builder.Services.AddMediatR(option => {
+    option.RegisterServicesFromAssemblyContaining<GetActivityList.Handler>(); //scans and registers handlers 
+    option.AddOpenBehavior(typeof(ValidationBehaviour<,>)); //Adds validation logic to the request handling pipeline
+});
+
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+builder.Services.AddValidatorsFromAssemblyContaining<CreateActivity>();
+//this service is only going to be created when its needed, ie when there is an exception
+builder.Services.AddTransient<ExceptionMiddleware>();
+
 
 var app = builder.Build();
+
+//adding the middleware for Error handling
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000", "https://localhost:3000"));

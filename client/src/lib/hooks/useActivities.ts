@@ -15,7 +15,7 @@ export const useActivities = (id?:string) => {
       const response = await agent.get<Activity[]>('/activities')
       return response.data
     },
-    staleTime:1000*60*5,
+    // staleTime:1000*60*5,
     enabled: !id && location.pathname === '/activities'
   });
 
@@ -26,7 +26,8 @@ export const useActivities = (id?:string) => {
         const response = await agent.get<Activity>(`/activities/${id}`)
         return response.data
       },
-      staleTime:1000*60*5,enabled: !!id //if we have the id return true and then execute this hook
+      // staleTime:1000*60*5,
+      enabled: !!id //if we have the id return true and then execute this hook
       
   })
 
@@ -41,7 +42,7 @@ export const useActivities = (id?:string) => {
       })
     },
     onError: (error) => {
-      console.error('Error updating activity(webooks folder):', error);
+      console.error('Error updating activity(webhooks folder):', error);
     }
   });
 
