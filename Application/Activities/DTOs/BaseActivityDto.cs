@@ -7,7 +7,7 @@ namespace Application.Activities.DTOs
 {
     public class BaseActivityDto
     {
-                public string Title { get; set; } = "";
+        public string Title { get; set; } = "";
         
         public DateTime Date { get; set; }
         
