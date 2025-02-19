@@ -2,22 +2,24 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 import agent from "../api/agent"
 import { useLocation } from "react-router";
+import { useAccount } from "./useAccount";
 
 
 export const useActivities = (id?:string) => {
 
   const queryClient = useQueryClient();
   const location = useLocation();
+  const {currentUser} = useAccount();
 
 
-  const { data: activities, isPending } = useQuery({
+  const { data: activities, isLoading } = useQuery({
     queryKey: ['activities'],
     queryFn: async () => {
       const response = await agent.get<Activity[]>('/activities')
       return response.data
     },
     // staleTime:1000*60*5,
-    enabled: !id && location.pathname === '/activities'
+    enabled: !id && location.pathname === '/activities' && !!currentUser
   });
 
   //web hook to fetch a single activity from API based on id
@@ -28,7 +30,7 @@ export const useActivities = (id?:string) => {
         return response.data
       },
       // staleTime:1000*60*5,
-      enabled: !!id //if we have the id return true and then execute this hook
+      enabled: !!id && !!currentUser//if we have the id return true and then execute this hook
       
   })
 
@@ -80,7 +82,7 @@ export const useActivities = (id?:string) => {
 
   return {
     activities,
-    isPending,
+    isLoading,
     updateActivity,
     createActivity,
     deleteActivity,

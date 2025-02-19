@@ -8,22 +8,31 @@ import Counter from "../../feature/counter/Counter";
 import TestErrors from "../../feature/errors/TestErrors";
 import NotFound from "../../feature/errors/NotFound";
 import ServerError from "../../feature/errors/ServerError";
+import LoginForm from "../../feature/account/LoginForm";
+import RequireAuth from "./requireAuth";
+import RegisterForm from "../../feature/account/RegisterForm";
 
 export const router = createBrowserRouter([
     {
-        path:'/',
+        path: '/',
         element: <App />,
-        children:[
-            {path:'', element: <HomePage />},
-            {path:'activities', element: <ActivityDashboard />},
-            {path:'activities/:id', element: <ActivityDetailsPage />},
-            {path:'createActivity', element: <ActivityForm key='create' />},
-            {path:'manage/:id', element: <ActivityForm />},
-            {path:'counter', element: <Counter />},
-            {path:'errors', element: <TestErrors />},
-            {path:'not-found', element: <NotFound />},
-            {path:'server-error', element: <ServerError />},
-            {path:'*', element: <Navigate replace to='/not-found' />},
+        children: [
+            {
+                element: <RequireAuth />, children: [
+                    { path: 'activities', element: <ActivityDashboard /> },
+                    { path: 'activities/:id', element: <ActivityDetailsPage /> },
+                    { path: 'createActivity', element: <ActivityForm key='create' /> },
+                    { path: 'manage/:id', element: <ActivityForm /> },
+                ]
+            },
+            { path: '', element: <HomePage /> },
+            { path: 'counter', element: <Counter /> },
+            { path: 'errors', element: <TestErrors /> },
+            { path: 'not-found', element: <NotFound /> },
+            { path: 'server-error', element: <ServerError /> },
+            { path: 'login', element: <LoginForm /> },
+            { path: 'register', element: <RegisterForm /> },
+            { path: '*', element: <Navigate replace to='/not-found' /> },
 
         ]
     }
