@@ -47,6 +47,7 @@ namespace API.Controllers
                 user.ImageUrl
             });
         }
+        [AllowAnonymous]
         [HttpPost("logout")]
         public async Task<ActionResult> Logout()
         {
