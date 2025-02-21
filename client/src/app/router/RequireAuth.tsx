@@ -7,8 +7,11 @@ export default function RequireAuth() {
     const { currentUser, loadingUserInfo } = useAccount();
     const location = useLocation();
     if (loadingUserInfo) return <Typography>Loading...</Typography>
-
-    if (!currentUser) return <Navigate to='/login' state={{ from: location }} />
+    // console.log(currentUser);
+    if (!currentUser) {
+        // console.log(currentUser);
+        return <Navigate to='/login' state={{ from: location }} />
+    }
 
     return (
         <Outlet />

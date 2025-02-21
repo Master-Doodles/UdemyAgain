@@ -23,19 +23,19 @@ export const useAccount = () => {
         }
     });
 
-const registerUser = useMutation({
-    mutationFn:async (creds: RegisterSchema) =>{
-        await agent.post('/account/register',creds)
-        
-    },onSuccess: ()=> {
-        toast.success("Registration Was Successful");
-        navigate('/login')
-    },
-    onError: ()=> {
-        toast.success("Registration Failed");
-        
-    }
-})
+    const registerUser = useMutation({
+        mutationFn: async (creds: RegisterSchema) => {
+            await agent.post('/account/register', creds)
+
+        }, onSuccess: () => {
+            toast.success("Registration Was Successful");
+            navigate('/login')
+        },
+        onError: () => {
+            toast.success("Registration Failed");
+
+        }
+    })
 
     //logout the user
     const logoutUser = useMutation({
@@ -55,9 +55,13 @@ const registerUser = useMutation({
         queryFn: async () => {
             // Sends a GET request to retrieve user info from the '/account/user-info' endpoint
             const response = await agent.get<User>('/account/user-info');
+            // console.log('API Response:', response);
+            // console.log('API Data:', response.data);
+            // console.log('Current User:', { currentUser });
             return response.data;
         },
-        enabled: !queryClient.getQueryData(['user']) && location.pathname !== '/login' && location.pathname !== '/register' //if the user object is not in the react query data we get it 
+        enabled: !queryClient.getQueryData(['user']) && location.pathname !== '/register' //if the user object is not in the react query data we get it 
+
     })
 
     return {

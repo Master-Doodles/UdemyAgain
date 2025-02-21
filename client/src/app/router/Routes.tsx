@@ -9,7 +9,7 @@ import TestErrors from "../../feature/errors/TestErrors";
 import NotFound from "../../feature/errors/NotFound";
 import ServerError from "../../feature/errors/ServerError";
 import LoginForm from "../../feature/account/LoginForm";
-import RequireAuth from "./requireAuth";
+import RequireAuth from "./RequireAuth";
 import RegisterForm from "../../feature/account/RegisterForm";
 
 export const router = createBrowserRouter([

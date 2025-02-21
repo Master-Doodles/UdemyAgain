@@ -22,6 +22,9 @@ export default function LoginForm() {
         await loginUser.mutateAsync(data, {
             onSuccess: () => {
                 navigate(location.state?.from || '/activities');
+            },
+            onError:(error)=>{
+                console.log(error)
             }
         })
     }
