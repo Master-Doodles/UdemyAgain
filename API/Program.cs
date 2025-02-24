@@ -6,6 +6,7 @@ using Application.Core;
 using Application.Interfaces;
 using Domain;
 using FluentValidation;
+using Infrastructure.Photos;
 using Infrastructure.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -42,6 +43,7 @@ builder.Services.AddMediatR(option =>
 });
 
 builder.Services.AddScoped<IUserAccessor,UserAccessor>();
+builder.Services.AddScoped<IPhotoService,PhotoService>();
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 builder.Services.AddValidatorsFromAssemblyContaining<CreateActivity>();
 //this service is only going to be created when its needed, ie when there is an exception
@@ -60,6 +62,8 @@ builder.Services.AddAuthorization(opt =>{
     });
 });
 builder.Services.AddTransient<IAuthorizationHandler,IsHostRequirementHandler>();
+//service for configuring the cloudinary api
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 
 var app = builder.Build();
 

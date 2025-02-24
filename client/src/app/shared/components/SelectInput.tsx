@@ -5,6 +5,7 @@ import { FieldValues, useController, UseControllerProps } from "react-hook-form"
 type Props<T extends FieldValues> = {
     items: { text: string, value: string }[];
     label: string;
+    placeholder?: string;
 } & UseControllerProps<T> & Partial<SelectInputProps>
 
 export default function SelectInput<T extends FieldValues>(props: Props<T>) {
@@ -17,6 +18,11 @@ export default function SelectInput<T extends FieldValues>(props: Props<T>) {
                 label={props.label}
                 onChange={field.onChange}
             >
+                {props.placeholder && (
+                <MenuItem value="">
+                    {props.placeholder}
+                </MenuItem>
+            )}
                 {props.items.map(item => (
                     <MenuItem key={item.value} value={item.value}>
                         {item.text}

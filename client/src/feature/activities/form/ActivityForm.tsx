@@ -71,15 +71,11 @@ export default function ActivityForm() {
                 <TextInput label='Description' control={control} name="description" multiline
                     rows={3} />
                 <Box display='flex' gap={3} >
-                    <SelectInput items={categoryOptions} label='Category' control={control} name="category" />
+                    <SelectInput placeholder="-- Choose a category --" items={categoryOptions} label='Category' control={control} name="category" />
                     <DateTimeInput label='Date' control={control} name="date" />
                 </Box>
 
                 <LocationInput control={control} label='Enter the location' name="location" />
-                {/* <LocationInputs label='Venue' control={control} name="venue" /> */}
-
-
-
                 <Box display='flex' justifyContent='end' gap={3}>
                     <Button color="inherit">Cancel</Button>
                     <Button type="submit" color="success" variant="contained" disabled={updateActivity.isPending || createActivity.isPending} >Submit</Button>

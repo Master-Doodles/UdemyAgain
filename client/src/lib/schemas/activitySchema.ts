@@ -8,6 +8,8 @@ export const activitySchema = z.object({
     category: requiredString('Category'),
     date: z.coerce.date({
         message: 'Date is required'
+    }).refine(date => date > new Date(), {
+        message: 'Date must be in the future',
     }),
     location: z.object({
         venue: requiredString('Venue'),
