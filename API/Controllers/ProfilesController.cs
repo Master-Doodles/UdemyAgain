@@ -1,4 +1,5 @@
 using System;
+using Application.Activities.Commands;
 using Application.Profiles.Commands;
 using Application.Profiles.DTOs;
 using Application.Profiles.Queries;
@@ -31,6 +32,11 @@ public class ProfilesController : BaseApiController
     public async Task<ActionResult> SetMainPhoto(string photoId)
     {
         return HandleResult(await Mediator.Send(new SetMainPhoto.Command{PhotoId = photoId}));
+    }
+    [HttpPut("/api/profiles")]
+    public async Task<ActionResult> EditProfile(EditProfile.Command command)
+    {
+        return HandleResult(await Mediator.Send(command));
     }
 
     [HttpGet("{userId}")]
