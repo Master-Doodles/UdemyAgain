@@ -45,7 +45,7 @@ export const useAccount = () => {
         onSuccess: async () => {
             queryClient.removeQueries({ queryKey: ['user'] })
             queryClient.removeQueries({ queryKey: ['activities'] })
-            navigate('/')
+            navigate('/login')
 
         }
     })

@@ -9,5 +9,8 @@ public class UserProfile
 
     public string? Bio { get; set; }
     public string? ImageUrl { get; set; }
+    public bool Following { get; set; }
+    public int FollowersCount { get; set; }
+    public int FollowingCount { get; set; }
 
 }

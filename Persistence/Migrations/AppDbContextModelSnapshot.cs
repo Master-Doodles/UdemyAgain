@@ -80,6 +80,35 @@ namespace Persistence.Migrations
                     b.ToTable("ActivityAttendees");
                 });
 
+            modelBuilder.Entity("Domain.Comment", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ActivityId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActivityId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("Domain.Photo", b =>
                 {
                     b.Property<string>("Id")
@@ -175,6 +204,21 @@ namespace Persistence.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.UserFollowing", b =>
+                {
+                    b.Property<string>("ObserverId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TargetId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ObserverId", "TargetId");
+
+                    b.HasIndex("TargetId");
+
+                    b.ToTable("UserFollowings");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -324,6 +368,25 @@ namespace Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Domain.Comment", b =>
+                {
+                    b.HasOne("Domain.Activity", "Activity")
+                        .WithMany("Comments")
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Activity");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Domain.Photo", b =>
                 {
                     b.HasOne("Domain.User", "User")
@@ -333,6 +396,25 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.UserFollowing", b =>
+                {
+                    b.HasOne("Domain.User", "Observer")
+                        .WithMany("Followings")
+                        .HasForeignKey("ObserverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.User", "Target")
+                        .WithMany("Followers")
+                        .HasForeignKey("TargetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Observer");
+
+                    b.Navigation("Target");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -389,11 +471,17 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Activity", b =>
                 {
                     b.Navigation("Attendees");
+
+                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("Domain.User", b =>
                 {
                     b.Navigation("Activities");
+
+                    b.Navigation("Followers");
+
+                    b.Navigation("Followings");
 
                     b.Navigation("Photos");
                 });
