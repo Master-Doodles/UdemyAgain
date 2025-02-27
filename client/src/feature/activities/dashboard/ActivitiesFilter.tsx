@@ -1,9 +1,13 @@
 import { FilterList, Event } from "@mui/icons-material";
-import { Box, ListItemText, MenuList, Paper, Typography } from "@mui/material";
+import { Box, ListItemText, MenuItem, MenuList, Paper, Typography } from "@mui/material";
 import 'react-calendar/dist/Calendar.css';
 import Calendar from "react-calendar";
+import { useStore } from "../../../lib/hooks/useStore";
+import { observer } from "mobx-react-lite";
 
-export default function ActivitiesFilter() {
+const ActivitiesFilter = observer (function ActivitiesFilter() {
+    const {activityStore:{setStartDate,setFilter,filter, startDate}}= useStore();
+
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, borderRadius: 3 }}>
             <Paper sx={{ p: 3, borderRadius: 3 }}>
@@ -13,15 +17,22 @@ export default function ActivitiesFilter() {
                         Filters
                     </Typography>
                     <MenuList>
-                        <MenuList>
+                        <MenuItem
+                        selected ={filter === 'all'}
+                        onClick={() => setFilter('all')}
+                        >
                             <ListItemText primary='All Events' />
-                        </MenuList>
-                        <MenuList>
+                        </MenuItem>
+                        <MenuItem
+                        selected ={filter === 'isGoing'}
+                        onClick={() => setFilter('isGoing')}>
                             <ListItemText primary="I'm Going" />
-                        </MenuList>
-                        <MenuList>
+                        </MenuItem>
+                        <MenuItem
+                        selected ={filter === 'isHost'}
+                        onClick={() => setFilter('isHost')}>
                             <ListItemText primary="I'm Hosting" />
-                        </MenuList>
+                        </MenuItem>
                     </MenuList>
                 </Box>
             </Paper>
@@ -30,15 +41,14 @@ export default function ActivitiesFilter() {
                     <Event sx={{ mr: 1 }} />
                     Select Date
                 </Typography>
-                <Calendar />
-                <style>{`
-                .react-calendar__tile--now {
-                    background: #1877F2 !important; /* Change to Facebook blue */
-                    color: white !important;
-                    
-                }`}</style>
+                <Calendar 
+                value={startDate}
+                onChange={date => setStartDate(date as Date)}
+                />
                 
             </Box>
         </Box>
     )
 }
+)
+export default ActivitiesFilter;

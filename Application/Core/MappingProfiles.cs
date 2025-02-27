@@ -40,6 +40,7 @@ namespace Application.Activities.Core
                 .ForMember(d => d.ImageUrl, o => o.MapFrom(s => s.User.ImageUrl))
 
             ;
+            CreateMap<Activity,UserActivityDto>();
         }
     }
 }

@@ -10,7 +10,7 @@ function App() {
   return (
     <Box sx={{
       backgroundColor: 'rgba(59, 89, 152, 0.5)',
-      backdropFilter: 'blur(8px)',
+      // backdropFilter: 'blur(8px)', // breaks react
 
       color: 'white',
       minHeight: '100vh'
@@ -19,8 +19,8 @@ function App() {
       <CssBaseline />
       {location.pathname === '/' ? <HomePage /> : (
         <>
-          <NavBar />
-          <Container maxWidth="xl" sx={{ mt: 3,pb: 3 }}>
+          <NavBar/>
+          <Container maxWidth="xl" sx={{ pt:12}}>
             <Outlet />
             
           </Container>
