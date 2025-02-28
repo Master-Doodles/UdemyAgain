@@ -1,7 +1,7 @@
 import { Box, debounce, List, ListItemButton, TextField, Typography } from '@mui/material'
 import { useEffect, useMemo, useState } from 'react';
 import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
-import { LocationIQSuggestion } from '../../../lib/types';
+
 import axios from 'axios';
 
 type Props<T extends FieldValues> = {

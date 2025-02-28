@@ -41,7 +41,7 @@ namespace Persistence
                 x.HasOne(o => o.Target) // a Target(user being followed) can have many other followers
                 .WithMany(f => f.Followers)
                 .HasForeignKey(o => o.TargetId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
             });
             var dateTimeConverter = new ValueConverter<DateTime, DateTime>(
                 v => v.ToUniversalTime(),
